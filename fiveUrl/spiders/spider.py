@@ -26,6 +26,7 @@ class Util:
             result = ip_database.country(ip).country.name=='China'
         except Exception:
             return False
+        return result
     #----------------------------------------------------------------------
     @staticmethod
     def canCrawl(url):
