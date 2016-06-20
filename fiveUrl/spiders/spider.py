@@ -7,7 +7,6 @@
 """
 import geoip2.database
 import scrapy
-from bs4 import BeautifulSoup
 from fiveUrl.items import FiveurlItem
 import socket
 from urlparse import urlparse
@@ -34,7 +33,7 @@ class Util:
         if 'http' not in url:
             return False
         netloc = urlparse(url)[1]
-        if netloc in url_set or 'edu.cn' not in netloc:
+        if netloc in url_set :#or 'edu.cn' not in netloc:
             return False
         return True
 #        try:
@@ -54,8 +53,8 @@ class Util:
 class test(scrapy.spiders.Spider):
     """test Demo"""
     name = 'main'
-    start_urls = ['http://www.sdu.edu.cn']
-    allowed_domains = ['edu.cn']
+    start_urls = ['http://yinyue.kuwo.cn/']
+#    allowed_domains = ['edu.cn']
     #----------------------------------------------------------------------
     def parse(self,response):
         """parse"""
