@@ -54,6 +54,7 @@ class test(scrapy.spiders.Spider):
     """test Demo"""
     name = 'main'
     start_urls = ['http://www.bkjx1.sdu.edu.cn']
+    allowed_domains = ['edu.cn']
     #----------------------------------------------------------------------
     def parse(self,response):
         """parse"""
