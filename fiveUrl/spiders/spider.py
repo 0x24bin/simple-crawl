@@ -34,14 +34,15 @@ class Util:
         if 'http' not in url:
             return False
         netloc = urlparse(url)[1]
-        if netloc in url_set:
+        if netloc in url_set or 'edu.cn' not in netloc:
             return False
-        try:
-            ip = socket.gethostbyname(netloc)
-            #print('%s---->%s'%(url,ip))
-        except Exception:
-            return False # 找不到IP 返回false
-        return Util.ip_isChina(ip)
+        return True
+#        try:
+#           ip = socket.gethostbyname(netloc)
+#           #print('%s---->%s'%(url,ip))
+#        except Exception:
+ #           return False # 找不到IP 返回false
+ #       return Util.ip_isChina(ip)
     #----------------------------------------------------------------------
     @staticmethod
     def add_toInjection(url,netloc=None):
@@ -53,16 +54,13 @@ class Util:
 class test(scrapy.spiders.Spider):
     """test Demo"""
     name = 'main'
-    start_urls = ['http://www.bkjx1.sdu.edu.cn']
+    start_urls = ['http://www.sdu.edu.cn']
     allowed_domains = ['edu.cn']
     #----------------------------------------------------------------------
     def parse(self,response):
         """parse"""
-        soup = BeautifulSoup(response.body,'lxml')
         #print(soup.prettify())
-        for i in soup.findAll('a'):
-            if i.has_attr('href'):
-                url = i['href']
+        for url in response.xpath('//*[@href]/@href').extract():
                 #print(url)
                 if Util.canCrawl(url):
                     url_set.add(urlparse(url)[1])
