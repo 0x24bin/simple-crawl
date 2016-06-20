@@ -22,7 +22,10 @@ class Util:
     #----------------------------------------------------------------------
     def ip_isChina(ip):
         """本地的数据"""
-        return ip_database.country(ip).country.name=='China'
+        try:
+            result = ip_database.country(ip).country.name=='China'
+        except Exception:
+            return False
     #----------------------------------------------------------------------
     @staticmethod
     def canCrawl(url):
