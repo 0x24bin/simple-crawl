@@ -13,7 +13,7 @@ import socket
 from urlparse import urlparse
 url_set = set()
 sqlInjection_set = set()
-ip_database = geoip2.database.Reader('/home/fang/Downloads/1.mmdb')
+ip_database = geoip2.database.Reader('../1.mmdb')
 ########################################################################
 class Util:
     """工具类"""
