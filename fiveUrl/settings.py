@@ -30,7 +30,7 @@ NEWSPIDER_MODULE = 'fiveUrl.spiders'
 #CONCURRENT_REQUESTS_PER_IP=16
 
 # Disable cookies (enabled by default)
-#COOKIES_ENABLED=False
+COOKIES_ENABLED=False
 
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED=False
@@ -83,3 +83,7 @@ NEWSPIDER_MODULE = 'fiveUrl.spiders'
 #HTTPCACHE_DIR='httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES=[]
 #HTTPCACHE_STORAGE='scrapy.extensions.httpcache.FilesystemCacheStorage'
+CONCURRENT_REQUESTS = 10000
+DOWNLOAD_TIMEOUT = 20
+DOWNLOAD_MAXSIZE = 10737418
+USER_AGENT = 'Mozilla/5.0 ()X11; Linux x86_64) AppleWebKit/537.36 ()KHTML, like Gecko) Ubuntu Chromium/50.0.2661.102 Chrome/50.0.2661.102 Safari/537.36'

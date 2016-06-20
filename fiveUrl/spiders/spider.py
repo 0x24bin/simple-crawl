@@ -8,7 +8,7 @@
 import geoip2.database
 import scrapy
 from bs4 import BeautifulSoup
-import requests
+from fiveUrl.items import FiveurlItem
 import socket
 from urlparse import urlparse
 url_set = set()
@@ -72,5 +72,8 @@ class test(scrapy.spiders.Spider):
                     if 'http' not in url:
                         url = urlparse(response.url)[1]+'/'+'url'
                     if Util.add_toInjection(url):
-                        print('等待抓取的注入点%s'%url)
+                        #print('等待抓取的注入点%s'%url)
+                        item = FiveurlItem()
+                        item['url'] = url
+                        yield item
                         sqlInjection_set.add(urlparse(url)[1])
