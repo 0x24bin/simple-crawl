@@ -12,4 +12,5 @@ class FiveurlItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     url = scrapy.Field()
+    hasScaned = scrapy.Field()
     pass

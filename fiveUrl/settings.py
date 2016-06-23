@@ -61,9 +61,9 @@ COOKIES_ENABLED=False
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'fiveUrl.pipelines.SomePipeline': 300,
-#}
+ITEM_PIPELINES = {
+        'fiveUrl.pipelines.MongoDBPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -89,4 +89,8 @@ DOWNLOAD_TIMEOUT = 20
 DOWNLOAD_MAXSIZE = 10737418
 RETRY_ENABLED = False
 USER_AGENT = 'Mozilla/5.0 ()X11; Linux x86_64) AppleWebKit/537.36 ()KHTML, like Gecko) Ubuntu Chromium/50.0.2661.102 Chrome/50.0.2661.102 Safari/537.36'
+MONGODB_SERVER = "nofiht.ml"
+MONGODB_PORT = 27017
+MONGODB_DB = "from_aliyun"
+MONGODB_COLLECTION = "url"
 #REDIRECT_ENABLED = False

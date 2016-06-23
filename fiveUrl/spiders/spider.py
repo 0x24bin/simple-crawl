@@ -33,15 +33,15 @@ class Util:
         if 'http' not in url:
             return False
         netloc = urlparse(url)[1]
-        if netloc in url_set :#or 'edu.cn' not in netloc:
+        if netloc in url_set: #or 'gov.cn' not in netloc:
             return False
         return True
-#        try:
-#           ip = socket.gethostbyname(netloc)
-#           #print('%s---->%s'%(url,ip))
-#        except Exception:
- #           return False # 找不到IP 返回false
- #       return Util.ip_isChina(ip)
+        try:
+           ip = socket.gethostbyname(netloc)
+           #print('%s---->%s'%(url,ip))
+        except Exception:
+           return False # 找不到IP 返回false
+        return Util.ip_isChina(ip)
     #----------------------------------------------------------------------
     @staticmethod
     def add_toInjection(url,netloc=None):
@@ -53,8 +53,9 @@ class Util:
 class test(scrapy.spiders.Spider):
     """test Demo"""
     name = 'main'
-    start_urls = ['http://yinyue.kuwo.cn/']
-#    allowed_domains = ['edu.cn']
+#    start_urls = ['http://yinyue.kuwo.cn/']
+    start_urls = ['http://www.cmbchina.com/']
+#    allowed_domains = ['gov.cn']
     #----------------------------------------------------------------------
     def parse(self,response):
         """parse"""
@@ -64,7 +65,7 @@ class test(scrapy.spiders.Spider):
                 if Util.canCrawl(url):
                     url_set.add(urlparse(url)[1])
 #                    print('返回一个等待抓取的链接%s'%url)
-                    yield scrapy.Request(url)
+                    yield scrapy.Request(url, priority=-20)
                 if '=' in url:
                     if 'http' not in url:
                         url = urlparse(response.url)[1]+'/'+'url'
@@ -72,5 +73,6 @@ class test(scrapy.spiders.Spider):
                         #print('等待抓取的注入点%s'%url)
                         item = FiveurlItem()
                         item['url'] = url
+                        item['hasScaned'] = 0
                         yield item
                         sqlInjection_set.add(urlparse(url)[1])
