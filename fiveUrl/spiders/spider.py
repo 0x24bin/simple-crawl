@@ -22,7 +22,7 @@ class Util:
     def ip_isChina(ip):
         """本地的数据"""
         try:
-            result = ip_database.country(ip).country.name=='China'
+            result = ip_database.country(socket.gethostbyname(ip)).country.name=='China'
         except Exception:
             return False
         return result
@@ -35,12 +35,7 @@ class Util:
         netloc = urlparse(url)[1]
         if netloc in url_set: #or 'gov.cn' not in netloc:
             return False
-        return True
-        try:
-           ip = socket.gethostbyname(netloc)
-           #print('%s---->%s'%(url,ip))
-        except Exception:
-           return False # 找不到IP 返回false
+        return True #不对ip进行检验
         return Util.ip_isChina(ip)
     #----------------------------------------------------------------------
     @staticmethod
