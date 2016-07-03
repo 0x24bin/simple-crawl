@@ -62,7 +62,7 @@ COOKIES_ENABLED=False
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-        'fiveUrl.pipelines.MongoDBPipeline': 300,
+#        'fiveUrl.pipelines.MongoDBPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -93,4 +93,5 @@ MONGODB_SERVER = "nofiht.ml"
 MONGODB_PORT = 27017
 MONGODB_DB = "tudou_cn"
 MONGODB_COLLECTION = "url"
+DUPEFILTER_CLASS = 'fiveUrl.filter.CustomFilter'
 #REDIRECT_ENABLED = False
