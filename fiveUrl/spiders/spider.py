@@ -5,14 +5,14 @@
   Purpose: 增量式爬取网站
   Created: 2016年06月20日
 """
-import geoip2.database
+#import geoip2.database
 import scrapy
 from fiveUrl.items import FiveurlItem
 import socket
 from urlparse import urlparse
 url_set = set()
 sqlInjection_set = set()
-ip_database = geoip2.database.Reader('../1.mmdb')
+#ip_database = geoip2.database.Reader('../1.mmdb')
 ########################################################################
 class Util:
     """工具类"""
@@ -63,11 +63,12 @@ class test(scrapy.spiders.Spider):
                 #if Util.canCrawl(url):
 #                    url_set.add(urlparse(url)[1])
 #                    print('返回一个等待抓取的链接%s'%url)
-                yield scrapy.Request(url, priority=-20) # 直接yeild 过滤不应该让这个来做 同理 对注入点的处理应该也是交给pipeline做,等待完善
+                 # 直接yeild 过滤不应该让这个来做 同理 对注入点的处理应该也是交给pipeline做,等待完善
                 if '=' in url and 'css' not in url:
  #                   print url
                     if 'http' not in url:
                         url = 'http://'+urlparse(response.url)[1]+'/'+url
+                    yield scrapy.Request(url, priority=-20)
                     if Util.add_toInjection(url):
                         #print('等待抓取的注入点%s'%url)
                         item = FiveurlItem()
