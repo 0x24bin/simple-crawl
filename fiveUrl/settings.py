@@ -91,6 +91,6 @@ RETRY_ENABLED = False
 USER_AGENT = 'Mozilla/5.0 ()X11; Linux x86_64) AppleWebKit/537.36 ()KHTML, like Gecko) Ubuntu Chromium/50.0.2661.102 Chrome/50.0.2661.102 Safari/537.36'
 MONGODB_SERVER = "nofiht.ml"
 MONGODB_PORT = 27017
-MONGODB_DB = "from_aliyun"
+MONGODB_DB = "tudou_cn"
 MONGODB_COLLECTION = "url"
 #REDIRECT_ENABLED = False

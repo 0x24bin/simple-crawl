@@ -43,13 +43,16 @@ class Util:
         """每个主机只取一个链接,如果显式地传入了netloc参数,则xxxx"""
         if netloc:
             return netloc not in sqlInjection_set
-        return urlparse(url)[1] not in sqlInjection_set
+        things = urlparse(url)
+        if things[1]+things[2] not in sqlInjection_set:
+            sqlInjection_set.add(things[1]+things[2])
+            return True
 ########################################################################
 class test(scrapy.spiders.Spider):
     """test Demo"""
     name = 'main'
 #    start_urls = ['http://yinyue.kuwo.cn/']
-    start_urls = ['http://www.cmbchina.com/']
+    start_urls = ['http://%s'%i.strip() for i in open('target')]
 #    allowed_domains = ['gov.cn']
     #----------------------------------------------------------------------
     def parse(self,response):
@@ -60,14 +63,14 @@ class test(scrapy.spiders.Spider):
                 if Util.canCrawl(url):
                     url_set.add(urlparse(url)[1])
 #                    print('返回一个等待抓取的链接%s'%url)
-                    yield scrapy.Request(url, priority=-20)
-                if '=' in url:
+                    #yield scrapy.Request(url, priority=-20)
+                if '=' in url and 'css' not in url:
+ #                   print url
                     if 'http' not in url:
-                        url = urlparse(response.url)[1]+'/'+'url'
+                        url = 'http://'+urlparse(response.url)[1]+'/'+url
                     if Util.add_toInjection(url):
                         #print('等待抓取的注入点%s'%url)
                         item = FiveurlItem()
                         item['url'] = url
                         item['hasScaned'] = 0
                         yield item
-                        sqlInjection_set.add(urlparse(url)[1])
