@@ -60,10 +60,10 @@ class test(scrapy.spiders.Spider):
         #print(soup.prettify())
         for url in response.xpath('//*[@href]/@href').extract():
                 #print(url)
-                if Util.canCrawl(url):
-                    url_set.add(urlparse(url)[1])
+                #if Util.canCrawl(url):
+#                    url_set.add(urlparse(url)[1])
 #                    print('返回一个等待抓取的链接%s'%url)
-                    #yield scrapy.Request(url, priority=-20)
+                yield scrapy.Request(url, priority=-20) # 直接yeild 过滤不应该让这个来做 同理 对注入点的处理应该也是交给pipeline做,等待完善
                 if '=' in url and 'css' not in url:
  #                   print url
                     if 'http' not in url:
