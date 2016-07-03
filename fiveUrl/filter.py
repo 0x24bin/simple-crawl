@@ -1,3 +1,4 @@
+# Refer -> http://stackoverflow.com/questions/12553117/how-to-filter-duplicate-requests-based-on-url-in-scrapy
 from scrapy.dupefilters import RFPDupeFilter
 from scrapy.utils.request import request_fingerprint
 from urlparse import urlparse
